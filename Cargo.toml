@@ -1,0 +1,25 @@
+[package]
+name = "aloft"
+version = "0.1.0"
+edition = "2021"
+license = "CC-BY-NC-SA-4.0"
+description = "Aerial video screensaver for Wayland desktops"
+
+[dependencies]
+gtk = { package = "gtk4", version = "0.10", features = ["v4_14"] }
+adw = { package = "libadwaita", version = "0.8", features = ["v1_5"] }
+gst = { package = "gstreamer", version = "0.24", features = ["v1_24"] }
+gst-plugin-gtk4 = { version = "0.14", default-features = false, features = ["wayland", "dmabuf", "gtk_v4_14"] }
+wayland-client = "0.31"
+wayland-protocols = { version = "0.32", features = ["client", "staging"] }
+ureq = { version = "3", default-features = false, features = ["rustls"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tar = { version = "0.4", default-features = false }
+fastrand = "2"
+async-channel = "2"
+
+[profile.release]
+lto = true
+codegen-units = 1
+strip = true

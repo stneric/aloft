@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>de.eric_s.Aloft</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>CC-BY-NC-SA-4.0</project_license>
+  <name>Aloft</name>
+  <summary>Aerial video screensaver for Wayland desktops</summary>
+  <description>
+    <p>
+      Aloft plays the aerial videos known from Apple TV as a screensaver when your
+      computer is idle. It downloads them from Apple's servers when you ask it to and
+      does not include them. Aloft is not affiliated with Apple.
+    </p>
+    <p>
+      Videos are decoded in hardware. On computers with two GPUs the integrated one
+      does the decoding, so the dedicated one stays free.
+    </p>
+  </description>
+  <launchable type="desktop-id">de.eric_s.Aloft.desktop</launchable>
+  <developer id="de.eric_s"><name>Eric S.</name></developer>
+  <content_rating type="oars-1.1"/>
+  <releases>
+    <release version="0.1.0" date="2026-11-09"/>
+  </releases>
+</component>

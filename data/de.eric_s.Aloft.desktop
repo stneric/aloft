@@ -1,0 +1,20 @@
+[Desktop Entry]
+Type=Application
+Name=Aloft
+GenericName=Screensaver
+GenericName[de]=Bildschirmschoner
+Comment=Aerial video screensaver for Wayland desktops
+Comment[de]=Aerial-Video-Bildschirmschoner für Wayland-Desktops
+Exec=aloft
+Icon=de.eric_s.Aloft
+Terminal=false
+Categories=Settings;DesktopSettings;GTK;
+Keywords=screensaver;aerial;idle;video;Bildschirmschoner;
+StartupNotify=true
+SingleMainWindow=true
+Actions=start;
+
+[Desktop Action start]
+Name=Start screensaver now
+Name[de]=Bildschirmschoner jetzt starten
+Exec=aloft --start

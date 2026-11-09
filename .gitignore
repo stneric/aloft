@@ -1,0 +1,7 @@
+/target
+/build
+*.AppImage
+/packaging/arch/src
+/packaging/arch/pkg
+/packaging/arch/*.pkg.tar.zst
+/packaging/arch/aloft

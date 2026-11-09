@@ -1,0 +1,45 @@
+# Builds from this checkout: cd packaging/arch && makepkg -si
+pkgname=aloft
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Aerial video screensaver for Wayland desktops"
+arch=('x86_64' 'aarch64')
+license=('CC-BY-NC-SA-4.0')
+depends=(
+	'gtk4' 'libadwaita' 'glib2' 'wayland'
+	'gstreamer' 'gst-plugins-base' 'gst-plugins-good' 'gst-plugins-bad' 'gst-plugin-va'
+	'libva'
+)
+makedepends=('cargo')
+optdepends=(
+	'intel-media-driver: hardware decoding on Intel GPUs (Broadwell and newer)'
+	'libva-mesa-driver: hardware decoding on AMD GPUs'
+	'gst-libav: software decoding fallback'
+)
+options=('!lto' '!debug')
+
+_root="$(realpath "$startdir/../..")"
+
+prepare() {
+	rm -rf "$srcdir/$pkgname"
+	mkdir -p "$srcdir/$pkgname"
+	cp -a "$_root"/{Cargo.toml,Cargo.lock,src,data,LICENSE,README.md} "$srcdir/$pkgname/"
+	cd "$srcdir/$pkgname"
+	cargo fetch --locked --target "$(rustc -vV | sed -n 's/host: //p')"
+}
+
+build() {
+	cd "$srcdir/$pkgname"
+	export CARGO_TARGET_DIR=target
+	cargo build --frozen --release
+}
+
+package() {
+	cd "$srcdir/$pkgname"
+	install -Dm755 target/release/aloft "$pkgdir/usr/bin/aloft"
+	install -Dm644 data/de.eric_s.Aloft.desktop "$pkgdir/usr/share/applications/de.eric_s.Aloft.desktop"
+	install -Dm644 data/de.eric_s.Aloft.svg "$pkgdir/usr/share/icons/hicolor/scalable/apps/de.eric_s.Aloft.svg"
+	install -Dm644 data/de.eric_s.Aloft.metainfo.xml "$pkgdir/usr/share/metainfo/de.eric_s.Aloft.metainfo.xml"
+	install -Dm644 README.md "$pkgdir/usr/share/doc/$pkgname/README.md"
+	install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}
